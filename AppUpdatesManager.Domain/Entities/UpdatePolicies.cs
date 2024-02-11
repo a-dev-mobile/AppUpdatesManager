@@ -1,4 +1,4 @@
-namespace AppUpdatesManager.Domain.Models;
+namespace AppUpdatesManager.Domain.Entities;
 
 public class UpdatePolicies
 {

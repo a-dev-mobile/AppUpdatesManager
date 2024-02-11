@@ -18,4 +18,4 @@ COPY --from=build-env /app/out .
 EXPOSE 80
 
 # Укажите команду для запуска приложения
-ENTRYPOINT ["dotnet", "LinkShortener.API.dll"]
+ENTRYPOINT ["dotnet", "AppUpdatesManager.API.dll"]

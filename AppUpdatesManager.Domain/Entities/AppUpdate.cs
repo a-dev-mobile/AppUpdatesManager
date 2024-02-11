@@ -1,8 +1,8 @@
-namespace AppUpdatesManager.Domain.Models;
+namespace AppUpdatesManager.Domain.Entities;
 
 
 
-public class ApplicationUpdate
+public class AppUpdate
 {
     public required string DisplayName { get; set; }
     public required string PackageName { get; set; }

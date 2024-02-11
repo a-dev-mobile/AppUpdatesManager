@@ -1,8 +1,8 @@
-namespace AppUpdatesManager.Domain.Models;
+namespace AppUpdatesManager.Domain.Entities;
 
 public class UpdateDownloadDetails
 {
     public string? Url { get; set; }
-    public ApplicationVersionDetails? LatestVersionDetails { get; set; }
+    public AppVersionDetails? LatestVersionDetails { get; set; }
     public required UpdatePolicies UpdatePolicies { get; set; }
 }

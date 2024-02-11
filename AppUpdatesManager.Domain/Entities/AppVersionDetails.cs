@@ -1,7 +1,7 @@
-namespace AppUpdatesManager.Domain.Models;
+namespace AppUpdatesManager.Domain.Entities;
 
 
-public class ApplicationVersionDetails
+public class AppVersionDetails
 {
     public int VersionCode { get; set; }
     public required string VersionName { get; set; }
