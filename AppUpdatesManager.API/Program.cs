@@ -1,7 +1,9 @@
+using System.Reflection;
 using AppUpdatesManager.Application.Services.Contracts;
 using AppUpdatesManager.Application.Services.Implementations;
 using AppUpdatesManager.Domain.Interfaces;
 using AppUpdatesManager.Infrastructure.Repositories;
+using LinkShortener.API.SwaggerExtensions;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +16,8 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 
 // Регистрация  в DI контейнере
-builder.Services.AddScoped<IAppUpdateRepository, AppUpdateRepository>();
-builder.Services.AddScoped<IAppUpdateService, AppUpdateService>();
+// builder.Services.AddScoped<IAppUpdateRepository, AppUpdateRepository>();
+// builder.Services.AddScoped<IAppUpdateService, AppUpdateService>();
 
 // Добавление сервисов для контроллеров
 builder.Services.AddControllers();
@@ -37,8 +39,13 @@ builder.Services.AddSwaggerGen(options =>
         },
 
     });
-
+ options.SchemaFilter<CustomSchemaFilter>();
+      // Set the comments path for the Swagger JSON and UI.
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        options.IncludeXmlComments(xmlPath);
 });
+
 // Add CORS services and define the "AllowAll" policy
 builder.Services.AddCors(options =>
 {
@@ -60,5 +67,5 @@ app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/app-update-api/swagger/v1/swagger.json", "My API V1");
 });
-
+app.MapControllers();
 app.Run();

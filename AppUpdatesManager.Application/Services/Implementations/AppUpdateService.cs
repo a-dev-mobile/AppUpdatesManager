@@ -3,7 +3,7 @@ using AppUpdatesManager.Domain.Interfaces;
 
 namespace AppUpdatesManager.Application.Services.Implementations
 {
-    public class AppUpdateService : IAppUpdateService
+    public class AppUpdateService 
     {
         private readonly IAppUpdateRepository _appUpdateRepository;
 
@@ -12,9 +12,9 @@ namespace AppUpdatesManager.Application.Services.Implementations
             _appUpdateRepository = appUpdateRepository;
         }
 
-        public async Task<bool> IsPackageExistsAsync(string packageName)
+        public  bool IsPackageExistsAsync(string packageName)
         {
-            return await _appUpdateRepository.IsPackageExistsAsync(packageName);
+            return  true;
         }
     }
 }
