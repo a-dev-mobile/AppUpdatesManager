@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppUpdatesManager.Infrastructure.Repositories
 {
-    public class AppUpdateRepository 
+    public class AppUpdateRepository
     {
         // private readonly YourDbContext _context; // YourDbContext должен быть вашим контекстом базы данных
 
@@ -17,7 +17,7 @@ namespace AppUpdatesManager.Infrastructure.Repositories
 
         public async Task<bool> IsPackageExistsAsync(string packageName)
         {
-              await Task.Delay(2000);
+            await Task.Delay(2000);
             // Реализуйте логику проверки наличия пакета в базе данных
             // Например, используя Entity Framework Core:
             // return await _context.AppUpdates.AnyAsync(a => a.PackageName == packageName);

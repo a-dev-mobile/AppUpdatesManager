@@ -30,10 +30,10 @@ namespace LinkShortener.API.SwaggerExtensions
                     ["versionCode"] = new OpenApiInteger(1),
                     ["VersionName"] = new OpenApiString("1.0.1"),
                     ["Checksum"] = new OpenApiString("sdf893274ydfdfg8435"),
-                   
+
                 };
             }
         }
-        
+
     }
 }

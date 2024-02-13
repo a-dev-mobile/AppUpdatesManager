@@ -2,8 +2,10 @@ using System.Reflection;
 using AppUpdatesManager.Application.Services.Contracts;
 using AppUpdatesManager.Application.Services.Implementations;
 using AppUpdatesManager.Domain.Interfaces;
+using AppUpdatesManager.Infrastructure.Data;
 using AppUpdatesManager.Infrastructure.Repositories;
 using LinkShortener.API.SwaggerExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,10 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 builder.Logging.SetMinimumLevel(LogLevel.Debug);
+
+// Добавление и настройка контекста базы данных
+builder.Services.AddDbContext<AppUpdatesManagerDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
 // Регистрация  в DI контейнере
@@ -39,11 +45,11 @@ builder.Services.AddSwaggerGen(options =>
         },
 
     });
- options.SchemaFilter<CustomSchemaFilter>();
-      // Set the comments path for the Swagger JSON and UI.
-        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-        options.IncludeXmlComments(xmlPath);
+    options.SchemaFilter<CustomSchemaFilter>();
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
 });
 
 // Add CORS services and define the "AllowAll" policy

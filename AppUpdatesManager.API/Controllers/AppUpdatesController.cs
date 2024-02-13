@@ -18,16 +18,6 @@ namespace AppUpdatesManager.API.Controllers
         /// <para>
         /// Sample request:
         /// </para>
-        /// <code>
-        /// POST /check
-        /// {
-        ///     "packageName": "com.example.app",
-        ///     "versionCode": 1,
-        ///     "versionName": "1.0.0",
-        ///     "installerPackageName": "apk",
-        ///     "debugMode": false
-        /// }
-        /// </code>
         /// </remarks>
         /// <param name="request">Check Request - includes details such as package version, current version of the application, and debug mode.</param>
         /// <returns>Success Response - returns the type of update required ('hard', 'soft', or 'none') and the latest version information, including the checksum, if an update is available.</returns>
