@@ -2,28 +2,31 @@ using AppUpdatesManager.Domain.Interfaces;
 
 using AppUpdatesManager.Domain.Entities;
 using System.Threading.Tasks;
-// Добавьте необходимые пространства имён для работы с вашей базой данных, например, Entity Framework Core
+using AppUpdatesManager.Infrastructure.Data;
+
+
 
 namespace AppUpdatesManager.Infrastructure.Repositories
 {
-    public class AppUpdateRepository
+    public class AppUpdateRepository : IAppUpdateRepository
     {
-        // private readonly YourDbContext _context; // YourDbContext должен быть вашим контекстом базы данных
+        private readonly AppUpdatesManagerDbContext _context;
 
-        public AppUpdateRepository()
+
+
+        public AppUpdateRepository(AppUpdatesManagerDbContext context)
         {
-            // _context = context;
+            _context = context;
         }
 
-        public async Task<bool> IsPackageExistsAsync(string packageName)
-        {
-            await Task.Delay(2000);
-            // Реализуйте логику проверки наличия пакета в базе данных
-            // Например, используя Entity Framework Core:
-            // return await _context.AppUpdates.AnyAsync(a => a.PackageName == packageName);
-            return false;
-        }
 
-        // Реализуйте другие методы интерфейса IAppUpdateRepository
+
+        async Task<bool> IAppUpdateRepository.AddUpdateAsync(ApplicationUpdate update)
+        {
+            // Реализация добавления обновления в базу данных
+            _context.ApplicationUpdates.Add(update);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

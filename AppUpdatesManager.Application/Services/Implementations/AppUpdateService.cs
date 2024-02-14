@@ -1,9 +1,14 @@
+
+using AppUpdatesManager.Application.Contracts;
+using AppUpdatesManager.Application.DTOs;
 using AppUpdatesManager.Application.Services.Contracts;
+using AppUpdatesManager.Domain.Entities;
 using AppUpdatesManager.Domain.Interfaces;
+using AppUpdatesManager.Infrastructure.Entities;
 
 namespace AppUpdatesManager.Application.Services.Implementations
 {
-    public class AppUpdateService
+    public class AppUpdateService : IAppUpdateService
     {
         private readonly IAppUpdateRepository _appUpdateRepository;
 
@@ -12,9 +17,16 @@ namespace AppUpdatesManager.Application.Services.Implementations
             _appUpdateRepository = appUpdateRepository;
         }
 
-        public bool IsPackageExistsAsync(string packageName)
+        public async Task<bool> AddUpdateAsync(AppUpdateDto request)
         {
-            return true;
+            // Преобразуйте DTO в сущность и добавьте в базу данных с помощью репозитория
+            // Например:
+            var domain = new ApplicationUpdate { Name = request.FileName, PackageName = "" };
+            // return await _appUpdateRepository.AddAsync(entity);
+            await Task.Delay(1000);
+            return false;
         }
+
+
     }
 }

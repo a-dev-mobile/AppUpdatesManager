@@ -1,10 +1,13 @@
+
+using AppUpdatesManager.Domain.Entities;
+
 namespace AppUpdatesManager.Domain.Interfaces
 
 {
     public interface IAppUpdateRepository
     {
 
-        bool IsPackageExists(string packageName);
+        Task<bool> AddUpdateAsync(ApplicationUpdate modelDomain);
 
 
     }

@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using AppUpdatesManager.Infrastructure.Entities;
+using AppUpdatesManager.Domain.Interfaces;
+using AppUpdatesManager.Domain.Entities;
 
 namespace AppUpdatesManager.Infrastructure.Data
 {
@@ -10,11 +12,18 @@ namespace AppUpdatesManager.Infrastructure.Data
         {
         }
 
-        public DbSet<ApplicationUpdateEntity> ApplicationUpdates { get; set; }
-        public DbSet<DownloadDetailEntity> DownloadDetails { get; set; }
-        public DbSet<SoftwareVersionEntity> SoftwareVersions { get; set; }
-        public DbSet<UpdateRequirementEntity> UpdateRequirements { get; set; }
-        public DbSet<UpdateStrategyEntity> UpdateStrategies { get; set; }
+        public DbSet<ApplicationUpdate> ApplicationUpdates { get; set; }
+        public DbSet<DownloadDetail> DownloadDetails { get; set; }
+        public DbSet<SoftwareVersion> SoftwareVersions { get; set; }
+        public DbSet<UpdateRequirement> UpdateRequirements { get; set; }
+        public DbSet<UpdateStrategy> UpdateStrategies { get; set; }
+
+
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

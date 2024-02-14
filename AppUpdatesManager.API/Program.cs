@@ -4,6 +4,8 @@ using AppUpdatesManager.Application.Services.Implementations;
 using AppUpdatesManager.Domain.Interfaces;
 using AppUpdatesManager.Infrastructure.Data;
 using AppUpdatesManager.Infrastructure.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using LinkShortener.API.SwaggerExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -14,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddDebug();
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+// builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 // Добавление и настройка контекста базы данных
 builder.Services.AddDbContext<AppUpdatesManagerDbContext>(options =>
@@ -22,11 +24,21 @@ builder.Services.AddDbContext<AppUpdatesManagerDbContext>(options =>
 
 
 // Регистрация  в DI контейнере
-// builder.Services.AddScoped<IAppUpdateRepository, AppUpdateRepository>();
-// builder.Services.AddScoped<IAppUpdateService, AppUpdateService>();
+builder.Services.AddScoped<IAppUpdateRepository, AppUpdateRepository>();
+builder.Services.AddScoped<IAppUpdateService, AppUpdateService>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Добавление сервисов для контроллеров
+
 builder.Services.AddControllers();
+
+
+// builder.Services.AddFluentValidationAutoValidation();
+// builder.Services.AddFluentValidationClientsideAdapters();
+
+// builder.Services.AddValidatorsFromAssemblyContaining<AppUpdateRequestValidator>();
+// builder.Services.AddFluentValidationAutoValidation(config => config.DisableDataAnnotationsValidation = true);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -62,6 +74,10 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
+
+
+
 var app = builder.Build();
 
 

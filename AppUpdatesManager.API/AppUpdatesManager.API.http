@@ -1,6 +1,0 @@
-@AppUpdatesManager.API_HostAddress = http://localhost:5167
-
-GET {{AppUpdatesManager.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

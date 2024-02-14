@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using AppUpdatesManager.Application.DTOs;
+using AppUpdatesManager.Application.Models;
 
 namespace LinkShortener.API.SwaggerExtensions
 {
@@ -32,6 +33,16 @@ namespace LinkShortener.API.SwaggerExtensions
                     ["Checksum"] = new OpenApiString("sdf893274ydfdfg8435"),
 
                 };
+            }
+            if (context.Type == typeof(ErrorDetails))
+            {
+                schema.Properties["status"].Enum = new List<IOpenApiAny>
+            {
+                new OpenApiString(ErrorStatus.InvalidChecksum),
+                new OpenApiString(ErrorStatus.InvalidDescription),
+                new OpenApiString(ErrorStatus.InvalidFile)
+                // Добавьте другие статусы по мере необходимости
+            };
             }
         }
 
